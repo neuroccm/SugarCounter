@@ -12,9 +12,7 @@ struct CalendarView: View {
     @State private var displayedMonth: Date = Date()
     @State private var selectedDateItem: SelectedDateItem?
     @State private var showingAbout = false
-    @State private var showingShareSheet = false
-    @State private var csvURL: URL?
-    @State private var csvContent: String = ""
+    @State private var exportItem: ExportItem?
     @State private var showingExportError = false
 
     private let calendar = Calendar.current
@@ -177,13 +175,8 @@ struct CalendarView: View {
             .sheet(isPresented: $showingAbout) {
                 AboutView()
             }
-            .sheet(isPresented: $showingShareSheet, onDismiss: {
-                csvURL = nil
-                csvContent = ""
-            }) {
-                if let url = csvURL {
-                    ShareSheet(items: [csvContent, url])
-                }
+            .sheet(item: $exportItem) { item in
+                ShareSheet(items: [item.content, item.url])
             }
             .alert("Export Error", isPresented: $showingExportError) {
                 Button("OK", role: .cancel) { }
@@ -245,9 +238,7 @@ struct CalendarView: View {
 
         do {
             try content.write(to: tempURL, atomically: true, encoding: .utf8)
-            csvContent = content
-            csvURL = tempURL
-            showingShareSheet = true
+            exportItem = ExportItem(url: tempURL, content: content)
         } catch {
             showingExportError = true
         }

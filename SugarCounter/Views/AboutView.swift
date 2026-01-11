@@ -2,13 +2,17 @@ import SwiftUI
 import SwiftData
 import MessageUI
 
+struct ExportItem: Identifiable {
+    let id = UUID()
+    let url: URL
+    let content: String
+}
+
 struct AboutView: View {
     @Environment(\.dismiss) private var dismiss
     @Query(sort: \SugarEntry.timestamp) private var allEntries: [SugarEntry]
     @State private var showingMailComposer = false
-    @State private var showingShareSheet = false
-    @State private var csvURL: URL?
-    @State private var csvContent: String = ""
+    @State private var exportItem: ExportItem?
     @State private var showingExportError = false
 
     var body: some View {
@@ -104,13 +108,8 @@ Use of this app does not establish a doctor-patient relationship between you and
                     }
                 }
             }
-            .sheet(isPresented: $showingShareSheet, onDismiss: {
-                csvURL = nil
-                csvContent = ""
-            }) {
-                if let url = csvURL {
-                    ShareSheet(items: [csvContent, url])
-                }
+            .sheet(item: $exportItem) { item in
+                ShareSheet(items: [item.content, item.url])
             }
             .alert("Export Error", isPresented: $showingExportError) {
                 Button("OK", role: .cancel) { }
@@ -154,9 +153,7 @@ Use of this app does not establish a doctor-patient relationship between you and
 
         do {
             try content.write(to: tempURL, atomically: true, encoding: .utf8)
-            csvContent = content
-            csvURL = tempURL
-            showingShareSheet = true
+            exportItem = ExportItem(url: tempURL, content: content)
         } catch {
             showingExportError = true
         }
