@@ -70,9 +70,11 @@ A comprehensive Swift Native iOS app for tracking daily refined sugar intake wit
 ### Calendar History
 - Month view with navigation
 - Color-coded dots per day (green/yellow/red/gray)
-- Tap any date to view/add entries
+- Tap any date to view/add entries (future dates disabled)
 - Date navigation within day detail sheet
 - Dynamic legend based on current goal
+- Info button for quick access to About page
+- Export button for quick CSV export
 
 ### Learn (Educational Content)
 - **Understanding Sugar**: What is refined sugar, why track it
@@ -83,6 +85,7 @@ A comprehensive Swift Native iOS app for tracking daily refined sugar intake wit
 - **Hidden Sugars**: Surprising sources of sugar in everyday foods
 - **Health Tips**: Practical strategies to reduce sugar intake
 - **Official Guidelines**: WHO and AHA recommendations explained
+- Info button for quick access to About page
 
 ### About & Export
 - About page accessible via info button (top left)
