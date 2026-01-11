@@ -7,32 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A1F391A06B3EC9E1A8AA596 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482EECBBE2BF64E191A75D05 /* AboutView.swift */; };
 		2FCD5924205E343854EA67E8 /* ProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A70FBCA34B6B77D09402C57 /* ProgressRingView.swift */; };
 		30E3B91028607F0FE0CC2F00 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08C41E68058B7EF8BC8659B /* CalendarView.swift */; };
+		509F7C6223B27CD2E93ED581 /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB22E1DB5AC203D8E1A038 /* LearnView.swift */; };
 		592B7E98848C2971AE3AEFF3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334DCF9B6173DE1540E6A55D /* ContentView.swift */; };
 		6091A2F1C6495CCA84584C98 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3021ABE608C3C7041D2C65 /* ChartView.swift */; };
 		69333EC48E28E39D13590107 /* SugarConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CAAEA30BF38FC18DEB3B61B /* SugarConstants.swift */; };
+		738228077D16475011C85A50 /* GoalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B399A6DD503EF3730591B2BC /* GoalSettingsView.swift */; };
+		8ADDC08E3FAB2FB562CE13BC /* InsightsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4943818CA893E2D650A09B /* InsightsView.swift */; };
+		A7661B4DAAD94E9961772C8D /* CommonFoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDABF8C113414027E375C22E /* CommonFoodsView.swift */; };
 		C31A2D5A1C914CA0D8AE5FEB /* EntryRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF7CBDECAFCA6EB94A670E1 /* EntryRowView.swift */; };
 		D08C9988C59EC97D855453EF /* SugarEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A363F793FAB0A8404328778 /* SugarEntry.swift */; };
 		D1C6C7936CBB25F01EDDE9E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA53C7A55CD30D172B91C52C /* Assets.xcassets */; };
 		D71C2148B82EF1489DEB5CD8 /* SugarCounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B747FA0411B7F8E8ED8964 /* SugarCounterApp.swift */; };
 		D991DD86974A24340FC1426C /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AEEE791BA6E89971151E65 /* DailyView.swift */; };
+		F30790D1ED05D01DD44C2800 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EE988EEB9B454134A08E15 /* UserSettings.swift */; };
 		F644EBF2D215A35E0A40C110 /* EntryKeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864C4E1C7CA64A49987B5108 /* EntryKeypadView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08AB22E1DB5AC203D8E1A038 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
 		1A70FBCA34B6B77D09402C57 /* ProgressRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRingView.swift; sourceTree = "<group>"; };
+		28EE988EEB9B454134A08E15 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		334DCF9B6173DE1540E6A55D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		482EECBBE2BF64E191A75D05 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		4A363F793FAB0A8404328778 /* SugarEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugarEntry.swift; sourceTree = "<group>"; };
 		5AF7CBDECAFCA6EB94A670E1 /* EntryRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryRowView.swift; sourceTree = "<group>"; };
 		6CAAEA30BF38FC18DEB3B61B /* SugarConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugarConstants.swift; sourceTree = "<group>"; };
+		6D4943818CA893E2D650A09B /* InsightsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsView.swift; sourceTree = "<group>"; };
 		864C4E1C7CA64A49987B5108 /* EntryKeypadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryKeypadView.swift; sourceTree = "<group>"; };
 		90B747FA0411B7F8E8ED8964 /* SugarCounterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugarCounterApp.swift; sourceTree = "<group>"; };
 		A135223B86D465AF8A92C44A /* SugarCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SugarCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE3021ABE608C3C7041D2C65 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		B399A6DD503EF3730591B2BC /* GoalSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingsView.swift; sourceTree = "<group>"; };
 		D08C41E68058B7EF8BC8659B /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		DA53C7A55CD30D172B91C52C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2AEEE791BA6E89971151E65 /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
+		EDABF8C113414027E375C22E /* CommonFoodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonFoodsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -41,6 +53,7 @@
 			children = (
 				6CAAEA30BF38FC18DEB3B61B /* SugarConstants.swift */,
 				4A363F793FAB0A8404328778 /* SugarEntry.swift */,
+				28EE988EEB9B454134A08E15 /* UserSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -57,11 +70,16 @@
 		9C4F6A1FB7B7BB11D8A18C67 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				482EECBBE2BF64E191A75D05 /* AboutView.swift */,
 				D08C41E68058B7EF8BC8659B /* CalendarView.swift */,
 				AE3021ABE608C3C7041D2C65 /* ChartView.swift */,
+				EDABF8C113414027E375C22E /* CommonFoodsView.swift */,
 				334DCF9B6173DE1540E6A55D /* ContentView.swift */,
 				E2AEEE791BA6E89971151E65 /* DailyView.swift */,
 				864C4E1C7CA64A49987B5108 /* EntryKeypadView.swift */,
+				B399A6DD503EF3730591B2BC /* GoalSettingsView.swift */,
+				6D4943818CA893E2D650A09B /* InsightsView.swift */,
+				08AB22E1DB5AC203D8E1A038 /* LearnView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -122,7 +140,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2620;
+				LastUpgradeCheck = 1500;
 			};
 			buildConfigurationList = 92B57F025CF6410830D29FBA /* Build configuration list for PBXProject "SugarCounter" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -158,16 +176,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A1F391A06B3EC9E1A8AA596 /* AboutView.swift in Sources */,
 				30E3B91028607F0FE0CC2F00 /* CalendarView.swift in Sources */,
 				6091A2F1C6495CCA84584C98 /* ChartView.swift in Sources */,
+				A7661B4DAAD94E9961772C8D /* CommonFoodsView.swift in Sources */,
 				592B7E98848C2971AE3AEFF3 /* ContentView.swift in Sources */,
 				D991DD86974A24340FC1426C /* DailyView.swift in Sources */,
 				F644EBF2D215A35E0A40C110 /* EntryKeypadView.swift in Sources */,
 				C31A2D5A1C914CA0D8AE5FEB /* EntryRowView.swift in Sources */,
+				738228077D16475011C85A50 /* GoalSettingsView.swift in Sources */,
+				8ADDC08E3FAB2FB562CE13BC /* InsightsView.swift in Sources */,
+				509F7C6223B27CD2E93ED581 /* LearnView.swift in Sources */,
 				2FCD5924205E343854EA67E8 /* ProgressRingView.swift in Sources */,
 				69333EC48E28E39D13590107 /* SugarConstants.swift in Sources */,
 				D71C2148B82EF1489DEB5CD8 /* SugarCounterApp.swift in Sources */,
 				D08C9988C59EC97D855453EF /* SugarEntry.swift in Sources */,
+				F30790D1ED05D01DD44C2800 /* UserSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,20 +204,25 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 2FDZ6PF7H3;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sugar Counter";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.velohealth.SugarCounter;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -234,10 +263,8 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 2FDZ6PF7H3;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -258,7 +285,6 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.9;
@@ -271,20 +297,25 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 2FDZ6PF7H3;
 				INFOPLIST_KEY_CFBundleDisplayName = "Sugar Counter";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.velohealth.SugarCounter;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -325,10 +356,8 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 2FDZ6PF7H3;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -356,7 +385,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.9;

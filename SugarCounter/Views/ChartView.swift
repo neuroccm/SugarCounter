@@ -24,16 +24,32 @@ struct DaySummary: Identifiable {
     let dayIdentifier: String
     let total: Double
     let dayLabel: String
+    let goal: Double
+    let cautionThreshold: Double
 
     var color: Color {
-        SugarConstants.statusColor(for: total)
+        SugarConstants.statusColor(for: total, goal: goal, cautionThreshold: cautionThreshold)
     }
 }
 
 struct ChartView: View {
     @Query private var allEntries: [SugarEntry]
+    @Query private var allSettings: [UserSettings]
     @State private var selectedPeriod: ChartPeriod = .week
     @State private var selectedDay: DaySummary?
+    @State private var hasAppeared = false
+
+    private var settings: UserSettings? {
+        allSettings.first
+    }
+
+    private var dailyGoal: Double {
+        settings?.dailyGoal ?? SugarConstants.defaultDailyGoal
+    }
+
+    private var cautionThreshold: Double {
+        settings?.cautionThreshold ?? SugarConstants.defaultCautionThreshold
+    }
 
     private var daySummaries: [DaySummary] {
         let calendar = Calendar.current
@@ -55,14 +71,16 @@ struct ChartView: View {
                 date: date,
                 dayIdentifier: dayId,
                 total: total,
-                dayLabel: dayFormatter.string(from: date)
+                dayLabel: dayFormatter.string(from: date),
+                goal: dailyGoal,
+                cautionThreshold: cautionThreshold
             ))
         }
         return summaries
     }
 
     private var maxValue: Double {
-        max(daySummaries.map(\.total).max() ?? 0, SugarConstants.dailyGoal + 10)
+        max(daySummaries.map(\.total).max() ?? 0, dailyGoal + 10)
     }
 
     var body: some View {
@@ -86,11 +104,11 @@ struct ChartView: View {
                         .cornerRadius(4)
                     }
 
-                    RuleMark(y: .value("Goal", SugarConstants.dailyGoal))
+                    RuleMark(y: .value("Goal", dailyGoal))
                         .lineStyle(StrokeStyle(lineWidth: 2, dash: [5, 5]))
                         .foregroundStyle(.red.opacity(0.7))
                         .annotation(position: .top, alignment: .trailing) {
-                            Text("\(Int(SugarConstants.dailyGoal))g")
+                            Text("\(Int(dailyGoal))g")
                                 .font(.caption2)
                                 .foregroundColor(.red)
                                 .padding(.horizontal, 6)
@@ -139,22 +157,27 @@ struct ChartView: View {
                 Spacer()
             }
             .navigationTitle("Charts")
-            .animation(.easeInOut(duration: 0.3), value: selectedPeriod)
+            .animation(hasAppeared ? .easeInOut(duration: 0.3) : nil, value: selectedPeriod)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    hasAppeared = true
+                }
+            }
         }
     }
 
     private var summarySection: some View {
         let totals = daySummaries.map(\.total)
         let average = totals.isEmpty ? 0 : totals.reduce(0, +) / Double(totals.count)
-        let daysOverLimit = daySummaries.filter { $0.total > SugarConstants.dailyGoal }.count
-        let daysInGreen = daySummaries.filter { $0.total <= SugarConstants.cautionThreshold && $0.total > 0 }.count
+        let daysOverLimit = daySummaries.filter { $0.total > dailyGoal }.count
+        let daysInGreen = daySummaries.filter { $0.total <= cautionThreshold && $0.total > 0 }.count
 
         return VStack(spacing: 16) {
             HStack(spacing: 20) {
                 StatCard(
                     title: "Avg/Day",
                     value: "\(Int(round(average)))g",
-                    color: SugarConstants.statusColor(for: average)
+                    color: SugarConstants.statusColor(for: average, goal: dailyGoal, cautionThreshold: cautionThreshold)
                 )
                 StatCard(
                     title: "Days Over",
@@ -196,5 +219,5 @@ struct StatCard: View {
 
 #Preview {
     ChartView()
-        .modelContainer(for: SugarEntry.self, inMemory: true)
+        .modelContainer(for: [SugarEntry.self, UserSettings.self], inMemory: true)
 }

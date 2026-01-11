@@ -4,7 +4,7 @@ import SwiftData
 @main
 struct SugarCounterApp: App {
     var sharedModelContainer: ModelContainer = {
-        let schema = Schema([SugarEntry.self])
+        let schema = Schema([SugarEntry.self, UserSettings.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])

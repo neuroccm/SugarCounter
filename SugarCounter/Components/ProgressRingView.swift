@@ -3,14 +3,23 @@ import SwiftUI
 struct ProgressRingView: View {
     let total: Double
     let goal: Double
+    var cautionThreshold: Double?
     let lineWidth: CGFloat
+
+    private var effectiveCautionThreshold: Double {
+        cautionThreshold ?? (goal * 0.67)
+    }
 
     private var progress: Double {
         min(total / goal, 1.5)
     }
 
     private var color: Color {
-        SugarConstants.statusColor(for: total)
+        SugarConstants.statusColor(for: total, goal: goal, cautionThreshold: effectiveCautionThreshold)
+    }
+
+    private var statusLabel: String {
+        SugarConstants.statusLabel(for: total, goal: goal, cautionThreshold: effectiveCautionThreshold)
     }
 
     var body: some View {
@@ -43,7 +52,7 @@ struct ProgressRingView: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
 
-                Text(SugarConstants.statusLabel(for: total))
+                Text(statusLabel)
                     .font(.caption)
                     .fontWeight(.medium)
                     .foregroundColor(color)

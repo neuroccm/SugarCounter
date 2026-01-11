@@ -2,6 +2,8 @@ import SwiftUI
 
 struct EntryRowView: View {
     let entry: SugarEntry
+    var onRename: (() -> Void)?
+    var onEditGrams: (() -> Void)?
 
     private var timeFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -18,6 +20,11 @@ struct EntryRowView: View {
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
+            .onLongPressGesture {
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
+                onRename?()
+            }
 
             Spacer()
 
@@ -25,6 +32,15 @@ struct EntryRowView: View {
                 .font(.title3)
                 .fontWeight(.semibold)
                 .foregroundColor(.primary)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(Color(.tertiarySystemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 6))
+                .onLongPressGesture {
+                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    generator.impactOccurred()
+                    onEditGrams?()
+                }
         }
         .padding(.vertical, 4)
     }
