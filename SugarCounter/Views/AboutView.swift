@@ -8,6 +8,7 @@ struct AboutView: View {
     @State private var showingMailComposer = false
     @State private var showingShareSheet = false
     @State private var csvURL: URL?
+    @State private var csvContent: String = ""
     @State private var showingExportError = false
 
     var body: some View {
@@ -105,9 +106,10 @@ Use of this app does not establish a doctor-patient relationship between you and
             }
             .sheet(isPresented: $showingShareSheet, onDismiss: {
                 csvURL = nil
+                csvContent = ""
             }) {
                 if let url = csvURL {
-                    ShareSheet(items: [url])
+                    ShareSheet(items: [csvContent, url])
                 }
             }
             .alert("Export Error", isPresented: $showingExportError) {
@@ -130,7 +132,7 @@ Use of this app does not establish a doctor-patient relationship between you and
         let sortedDays = dailyTotals.keys.sorted()
 
         // Create CSV content
-        var csvContent = "Date,Total Refined Sugar (g)\n"
+        var content = "Date,Total Refined Sugar (g)\n"
 
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "yyyy-MM-dd"
@@ -142,7 +144,7 @@ Use of this app does not establish a doctor-patient relationship between you and
             if let date = inputFormatter.date(from: dayId) {
                 let formattedDate = outputFormatter.string(from: date)
                 let total = dailyTotals[dayId] ?? 0
-                csvContent += "\(formattedDate),\(String(format: "%.1f", total))\n"
+                content += "\(formattedDate),\(String(format: "%.1f", total))\n"
             }
         }
 
@@ -151,7 +153,8 @@ Use of this app does not establish a doctor-patient relationship between you and
         let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
 
         do {
-            try csvContent.write(to: tempURL, atomically: true, encoding: .utf8)
+            try content.write(to: tempURL, atomically: true, encoding: .utf8)
+            csvContent = content
             csvURL = tempURL
             showingShareSheet = true
         } catch {
