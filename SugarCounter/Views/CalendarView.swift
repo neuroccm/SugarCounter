@@ -176,7 +176,9 @@ struct CalendarView: View {
             .sheet(isPresented: $showingAbout) {
                 AboutView()
             }
-            .sheet(isPresented: $showingShareSheet) {
+            .sheet(isPresented: $showingShareSheet, onDismiss: {
+                csvURL = nil
+            }) {
                 if let url = csvURL {
                     ShareSheet(items: [url])
                 }

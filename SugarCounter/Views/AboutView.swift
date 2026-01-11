@@ -103,7 +103,9 @@ Use of this app does not establish a doctor-patient relationship between you and
                     }
                 }
             }
-            .sheet(isPresented: $showingShareSheet) {
+            .sheet(isPresented: $showingShareSheet, onDismiss: {
+                csvURL = nil
+            }) {
                 if let url = csvURL {
                     ShareSheet(items: [url])
                 }
