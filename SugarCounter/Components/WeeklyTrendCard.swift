@@ -65,7 +65,7 @@ struct WeeklyTrendCard: View {
                             .foregroundColor(.secondary)
                         Text("\(trend.thisWeekDaysTracked) days")
                             .font(.caption2)
-                            .foregroundColor(.tertiary)
+                            .foregroundStyle(.tertiary)
                     }
                     .frame(maxWidth: .infinity)
 
@@ -97,7 +97,7 @@ struct WeeklyTrendCard: View {
                             .foregroundColor(.secondary)
                         Text("\(trend.lastWeekDaysTracked) days")
                             .font(.caption2)
-                            .foregroundColor(.tertiary)
+                            .foregroundStyle(.tertiary)
                     }
                     .frame(maxWidth: .infinity)
                 }
