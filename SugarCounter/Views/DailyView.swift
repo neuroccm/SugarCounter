@@ -3,6 +3,7 @@ import SwiftData
 
 struct DailyView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @Query private var allEntries: [SugarEntry]
     @Query private var allSettings: [UserSettings]
     @State private var showingKeypad = false
@@ -65,6 +66,15 @@ struct DailyView: View {
         isToday ? "No entries yet today" : "No entries for this day"
     }
 
+    private var dailyInsight: DailyInsight {
+        InsightEngine.generateInsight(
+            entries: allEntries,
+            currentTotal: currentTotal,
+            dailyGoal: dailyGoal,
+            cautionThreshold: cautionThreshold
+        )
+    }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
@@ -120,10 +130,15 @@ struct DailyView: View {
                 )
                 .frame(width: 200, height: 200)
                 .padding(.top, 12)
-                .padding(.bottom, 16)
+                .padding(.bottom, 12)
                 .onTapGesture {
                     showingGoalSettings = true
                 }
+
+                // Smart Insight Card - personalized intelligence
+                SmartInsightCard(insight: dailyInsight)
+                    .padding(.horizontal)
+                    .padding(.bottom, 12)
 
                 if currentEntries.isEmpty {
                     VStack(spacing: 12) {
@@ -202,11 +217,14 @@ struct DailyView: View {
             .sheet(isPresented: $showingKeypad) {
                 EntryKeypadView(
                     itemNumber: nextItemNumber,
+                    currentTotal: currentTotal,
+                    dailyGoal: dailyGoal,
+                    cautionThreshold: cautionThreshold,
                     onSave: { grams in
                         addEntry(grams: grams)
                     }
                 )
-                .presentationDetents([.medium])
+                .presentationDetents(horizontalSizeClass == .regular ? [.large] : [.medium, .large])
                 .presentationDragIndicator(.visible)
             }
             .sheet(item: $entryToRename) { entry in
@@ -219,7 +237,7 @@ struct DailyView: View {
             }
             .sheet(item: $entryToEditGrams) { entry in
                 EditGramsView(entry: entry)
-                    .presentationDetents([.medium])
+                    .presentationDetents(horizontalSizeClass == .regular ? [.large] : [.medium, .large])
                     .presentationDragIndicator(.visible)
             }
             .sheet(isPresented: $showingAbout) {
@@ -295,6 +313,7 @@ struct RenameEntryView: View {
 
 struct EditGramsView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     let entry: SugarEntry
     @State private var inputString: String
 
@@ -325,56 +344,74 @@ struct EditGramsView: View {
         [".", "0", "⌫"]
     ]
 
+    private var isRegularWidth: Bool {
+        horizontalSizeClass == .regular
+    }
+
     var body: some View {
         NavigationStack {
-            VStack(spacing: 24) {
-                VStack(spacing: 8) {
-                    Text(entry.displayName)
-                        .font(.headline)
-                        .foregroundColor(.secondary)
+            GeometryReader { geometry in
+                ScrollView {
+                    VStack(spacing: 16) {
+                        VStack(spacing: 4) {
+                            Text(entry.displayName)
+                                .font(.headline)
+                                .foregroundColor(.secondary)
 
-                    HStack(alignment: .lastTextBaseline, spacing: 4) {
-                        Text(displayValue)
-                            .font(.system(size: 56, weight: .bold, design: .rounded))
-                            .contentTransition(.numericText())
-                            .animation(.easeInOut(duration: 0.1), value: inputString)
-                        Text("g")
-                            .font(.system(size: 32, weight: .semibold, design: .rounded))
-                            .foregroundColor(.secondary)
-                    }
-                }
-                .padding(.top, 16)
+                            HStack(alignment: .lastTextBaseline, spacing: 4) {
+                                Text(displayValue)
+                                    .font(.system(size: min(56, geometry.size.height * 0.12), weight: .bold, design: .rounded))
+                                    .minimumScaleFactor(0.5)
+                                    .lineLimit(1)
+                                    .contentTransition(.numericText())
+                                    .animation(.easeInOut(duration: 0.1), value: inputString)
+                                Text("g")
+                                    .font(.system(size: min(32, geometry.size.height * 0.07), weight: .semibold, design: .rounded))
+                                    .foregroundColor(.secondary)
+                                    .minimumScaleFactor(0.5)
+                            }
+                        }
+                        .padding(.top, 8)
 
-                VStack(spacing: 12) {
-                    ForEach(keypadButtons, id: \.self) { row in
-                        HStack(spacing: 12) {
-                            ForEach(row, id: \.self) { key in
-                                EditGramsKeypadButton(key: key) {
-                                    handleKeyPress(key)
+                        let buttonHeight = min(60, (geometry.size.height - 200) / 5)
+                        let buttonSpacing: CGFloat = 10
+                        let maxKeypadWidth: CGFloat = isRegularWidth ? 400 : .infinity
+
+                        VStack(spacing: buttonSpacing) {
+                            ForEach(keypadButtons, id: \.self) { row in
+                                HStack(spacing: buttonSpacing) {
+                                    ForEach(row, id: \.self) { key in
+                                        EditGramsKeypadButton(key: key, height: max(44, buttonHeight)) {
+                                            handleKeyPress(key)
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-                }
-                .padding(.horizontal, 24)
+                        .frame(maxWidth: maxKeypadWidth)
+                        .padding(.horizontal, 20)
 
-                Button {
-                    entry.grams = numericValue
-                    let generator = UIImpactFeedbackGenerator(style: .medium)
-                    generator.impactOccurred()
-                    dismiss()
-                } label: {
-                    Text("Save")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 16)
-                        .background(isValidInput ? Color.accentColor : Color.gray.opacity(0.3))
-                        .foregroundColor(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                        Button {
+                            entry.grams = numericValue
+                            let generator = UIImpactFeedbackGenerator(style: .medium)
+                            generator.impactOccurred()
+                            dismiss()
+                        } label: {
+                            Text("Save")
+                                .font(.headline)
+                                .frame(maxWidth: isRegularWidth ? 400 : .infinity)
+                                .padding(.vertical, 14)
+                                .background(isValidInput ? Color.accentColor : Color.gray.opacity(0.3))
+                                .foregroundColor(.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 14))
+                        }
+                        .disabled(!isValidInput)
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 12)
+                    }
+                    .frame(minHeight: geometry.size.height)
                 }
-                .disabled(!isValidInput)
-                .padding(.horizontal, 24)
-                .padding(.bottom, 16)
+                .scrollBounceBehavior(.basedOnSize)
             }
             .navigationTitle("Edit Grams")
             .navigationBarTitleDisplayMode(.inline)
@@ -423,6 +460,7 @@ struct EditGramsView: View {
 
 struct EditGramsKeypadButton: View {
     let key: String
+    let height: CGFloat
     let action: () -> Void
 
     var body: some View {
@@ -433,11 +471,13 @@ struct EditGramsKeypadButton: View {
                         .font(.title2)
                 } else {
                     Text(key)
-                        .font(.system(size: 28, weight: .medium, design: .rounded))
+                        .font(.system(size: min(28, height * 0.4), weight: .medium, design: .rounded))
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(1)
                 }
             }
             .frame(maxWidth: .infinity)
-            .frame(height: 60)
+            .frame(height: height)
             .background(Color(.secondarySystemBackground))
             .clipShape(RoundedRectangle(cornerRadius: 12))
         }

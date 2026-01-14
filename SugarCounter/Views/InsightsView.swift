@@ -42,6 +42,12 @@ struct InsightsView: View {
                         weekendAverage: weekendAverage
                     )
 
+                    // Weekly Trend Comparison
+                    WeeklyTrendCard(trend: weeklyTrend)
+
+                    // Time of Day Analysis
+                    TimeOfDayCard(breakdown: timeBreakdown)
+
                     // Achievements
                     AchievementsCard(
                         achievements: unlockedAchievements,
@@ -154,6 +160,14 @@ struct InsightsView: View {
         }
         guard !weekendTotals.isEmpty else { return 0 }
         return weekendTotals.reduce(0) { $0 + $1.total } / Double(weekendTotals.count)
+    }
+
+    private var timeBreakdown: InsightEngine.TimeBreakdown {
+        InsightEngine.calculateTimeBreakdown(entries: allEntries)
+    }
+
+    private var weeklyTrend: InsightEngine.WeeklyTrend {
+        InsightEngine.calculateWeeklyTrend(entries: allEntries)
     }
 
     private var unlockedAchievements: [Achievement] {
