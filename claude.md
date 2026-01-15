@@ -20,6 +20,12 @@ A comprehensive Swift Native iOS app for tracking daily refined sugar intake wit
   - Yellow: Caution zone
   - Red: Over limit
 - Circular progress ring visualization (tap to change goal)
+- **Smart Daily Insight Card**: Personalized insights based on user patterns
+  - Weekly comparison ("3g better than last week!")
+  - Time-of-day patterns ("Evening is your peak sugar time")
+  - Weekday vs weekend analysis
+  - Pace projections ("At this pace, you'll hit ~28g today")
+  - Streak encouragement
 - Swipe-to-delete entries
 - Context menu with Rename, Edit Grams, Delete options
 
@@ -50,6 +56,15 @@ A comprehensive Swift Native iOS app for tracking daily refined sugar intake wit
 - **Pattern Analysis**:
   - Weekday vs weekend comparison
   - Trend insights
+- **Weekly Trend Comparison**:
+  - This week vs last week averages
+  - Trend direction indicator (improving/stable/declining)
+  - Percentage change visualization
+- **Time-of-Day Analysis**:
+  - Morning/Afternoon/Evening/Night breakdown
+  - Average grams per time period
+  - Peak sugar time identification
+  - Visual percentage bars
 - **Achievements System**:
   - First Step (1 day tracked)
   - Week Warrior (7 days tracked)
@@ -114,21 +129,25 @@ SugarCounter/
 ├── Models/
 │   ├── SugarEntry.swift           # SwiftData model (with customName)
 │   ├── SugarConstants.swift       # Goal/threshold constants (dynamic)
-│   └── UserSettings.swift         # User preferences & goals
+│   ├── UserSettings.swift         # User preferences & goals
+│   └── InsightEngine.swift        # Smart insight generation & pattern analysis
 ├── Views/
 │   ├── ContentView.swift          # Tab container (5 tabs)
-│   ├── DailyView.swift            # Main daily tracking + date nav
+│   ├── DailyView.swift            # Main daily tracking + date nav + insight card
 │   ├── EntryKeypadView.swift      # Numeric input for new entries
 │   ├── ChartView.swift            # Bar chart view
 │   ├── CalendarView.swift         # Historical calendar + DayDetailView
-│   ├── InsightsView.swift         # Streaks, stats, achievements
+│   ├── InsightsView.swift         # Streaks, stats, achievements, trends
 │   ├── LearnView.swift            # Educational content hub
 │   ├── CommonFoodsView.swift      # Sugar reference database
 │   ├── GoalSettingsView.swift     # Goal customization
 │   └── AboutView.swift            # About page + CSV export
 ├── Components/
 │   ├── ProgressRingView.swift     # Circular progress
-│   └── EntryRowView.swift         # Entry list item (with long-press)
+│   ├── EntryRowView.swift         # Entry list item (with long-press)
+│   ├── SmartInsightCard.swift     # Personalized insight display
+│   ├── TimeOfDayCard.swift        # Time-of-day consumption analysis
+│   └── WeeklyTrendCard.swift      # Week-over-week comparison
 └── Assets.xcassets/               # App icon, colors
 ```
 
@@ -187,6 +206,9 @@ SugarCounter/
 - [x] **Achievements System** (9 achievements)
 - [x] **Learn Tab** (educational content)
 - [x] **Common Foods Database** (80+ items)
+- [x] **Smart Daily Insights** (personalized pattern analysis)
+- [x] **Time-of-Day Analysis** (consumption timing breakdown)
+- [x] **Weekly Trend Comparison** (this week vs last week)
 - [ ] TestFlight deployment
 - [ ] App Store submission
 
@@ -207,8 +229,22 @@ SugarCounter/
 
 ## App Store Differentiators
 These features differentiate SugarCounter from simple template apps:
-1. **Educational Content**: Curated information about sugar, health guidelines, and hidden sugars
-2. **Common Foods Database**: 80+ items with sugar content, searchable and categorized
-3. **Smart Insights**: Pattern recognition (weekday vs weekend), streak tracking
-4. **Gamification**: 9 unlockable achievements to encourage healthy habits
-5. **Customizable Goals**: Multiple presets (WHO, AHA) plus custom option
+1. **Personalized Intelligence**: Smart insights on main screen analyzing individual user patterns
+   - Dynamic messages based on actual consumption data
+   - Weekly trend comparisons with specific numbers
+   - Time-of-day pattern recognition
+   - Pace projections and streak encouragement
+2. **Time-Based Behavioral Analysis**: Breakdown of when sugar is consumed (morning/afternoon/evening/night)
+3. **Weekly Trend Tracking**: Visual comparison of this week vs last week with improvement percentages
+4. **Educational Content**: Curated information about sugar, health guidelines, and hidden sugars
+5. **Common Foods Database**: 80+ items with sugar content, searchable and categorized
+6. **Smart Pattern Recognition**: Weekday vs weekend analysis, streak tracking
+7. **Gamification**: 9 unlockable achievements to encourage healthy habits
+8. **Customizable Goals**: Multiple presets (WHO, AHA) plus custom option
+
+### Why These Features Pass App Store Review (4.3a)
+Template apps typically show raw data (today's total, goal). SugarCounter provides:
+- **Personalized insights** based on individual user patterns (not generic tips)
+- **Behavioral analysis** using timestamps that were stored but never analyzed
+- **Comparative trends** with specific numbers (not just charts)
+- **Predictive messaging** ("At this pace..." projections)
